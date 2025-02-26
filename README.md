@@ -28,5 +28,7 @@ no more prefix!
 ```
 
 Note: You don't really need all this. You could just add
-`public static final java.io.PrintStream P = System.out;`
+```java
+public static final java.io.PrintStream P = System.out;
+```
 to the class fields, but then you won't get the extra debug printing stuff.
