@@ -6,7 +6,7 @@
  * @author Vladimir J. Caso
  * @version 1.0, 02/26/25
  */ 
-public abstract class EPrnt {
+public abstract class EPrnt <T> {
 
 	/**
 	 * P refers to <code>System.out</code>. Use <code>P.print</code> / <code>P.println</code> instead of <code>System.out.print</code> / <code> System.out.println </code>
@@ -78,173 +78,135 @@ public abstract class EPrnt {
 	 */
 	public static final String getDebugPostfix(){ return debugPostfix; }
 
-//PRINT
+	/**
+	 * If <code>debugPrinting</code> is true, it calls <code>print(b)</code>
+	 * Neither the prefix nor the postfix are printed.
+	 * @param p the value to be printed.
+	 * @see #debugPrinting
+	 */
+	public static final <T> void dprintraw(T p){
+		if(debugPrinting) 
+			P.print(p);
+	}
+
+	/**
+	 * If <code>debugPrinting</code> is true, it calls <code>print(b)</code>
+	 * Neither the prefix nor the postfix are printed.
+	 * @param p the value to be printed.
+	 * @see #debugPrinting
+	 */
+	public static final <T> void dprintlnraw(T p){
+		if(debugPrinting) 
+			P.println(p);
+	}
+
 	/**
 	 * If <code>debugPrinting</code> is true, it calls <code>print(debugPrefix + b + debugPostfix)</code>
-	 * @param b the boolean value to be printed.
+	 * @param p the value to be printed.
 	 * @see #debugPrinting
 	 * @see #debugPrefix
 	 * @see #debugPostfix
 	 */
-	public static final void dprint(boolean b){ if(debugPrinting) P.print(debugPrefix + b + debugPostfix); }
+	public static final <T> void dprint(T p){
+		if(debugPrinting) 
+			P.print(debugPrefix + p + debugPostfix);
+	}
 
 	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>print(debugPrefix + c + debugPostfix)</code>
-	 * @param c the character value to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprint(char c){ if(debugPrinting) P.print(debugPrefix + c + debugPostfix); }
-
-	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>print(debugPrefix + s + debugPostfix)</code>
-	 * @param s the character array to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprint(char[] s){ if(debugPrinting) P.print(debugPrefix + s + debugPostfix); }
-	
-	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>print(debugPrefix + d + debugPostfix)</code>
-	 * @param d the double to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprint(double d){ if(debugPrinting) P.print(debugPrefix + d + debugPostfix); }
-	
-	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>print(debugPrefix + f + debugPostfix)</code>
-	 * @param f the float to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprint(float f){ if(debugPrinting) P.print(debugPrefix + f + debugPostfix); }
-	
-	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>print(debugPrefix + i + debugPostfix)</code>
-	 * @param i the integer to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprint(int i){ if(debugPrinting) P.print(debugPrefix + i + debugPostfix); }
-	
-	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>print(debugPrefix + l + debugPostfix)</code>
-	 * @param l the long to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprint(long l){ if(debugPrinting) P.print(debugPrefix + l + debugPostfix); }
-	
-	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>print(debugPrefix + o + debugPostfix)</code>
-	 * @param o the Object to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprint(Object o){ if(debugPrinting) P.print(debugPrefix + o + debugPostfix); }
-	
-	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>print(debugPrefix + s + debugPostfix)</code>
-	 * @param s the String to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprint(String s){ if(debugPrinting) P.print(debugPrefix + s + debugPostfix); }
-
-//PRINTLN
-/**
 	 * If <code>debugPrinting</code> is true, it calls <code>println(debugPrefix + b + debugPostfix)</code>
-	 * @param b the boolean value to be printed.
+	 * @param p the value to be printed.
 	 * @see #debugPrinting
 	 * @see #debugPrefix
 	 * @see #debugPostfix
 	 */
-	public static final void dprintln(boolean b){ if(debugPrinting) P.println(debugPrefix + b + debugPostfix); }
+	public static final <T> void dprintln(T p){
+		if(debugPrinting) 
+			P.println(debugPrefix + p + debugPostfix);
+	}
 
 	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>println(debugPrefix + c + debugPostfix)</code>
-	 * @param c the character value to be printed.
+	 * If <code>debugPrinting</code> is true, it calls <code>print((ignorePrefix? "":debugPrefix) + p + debugPostfix)</code>
+	 * @param ignorePrefix if true, the prefix is not printed but the postfix always is.
+	 * @param p the value to be printed.
 	 * @see #debugPrinting
 	 * @see #debugPrefix
 	 * @see #debugPostfix
 	 */
-	public static final void dprintln(char c){ if(debugPrinting) P.println(debugPrefix + c + debugPostfix); }
+	public static final <T> void dprint(boolean ignorePrefix, T p){
+		if(debugPrinting) 
+			P.print((ignorePrefix? "" : debugPrefix) + p + debugPostfix);
+	}
 
 	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>println(debugPrefix + s + debugPostfix)</code>
-	 * @param s the character array to be printed.
+	 * If <code>debugPrinting</code> is true, it calls <code>println((ignorePrefix? "":debugPrefix) + p + debugPostfix)</code>
+	 * @param ignorePrefix if true, the prefix is not printed but the postfix always is.
+	 * @param p the value to be printed.
 	 * @see #debugPrinting
 	 * @see #debugPrefix
 	 * @see #debugPostfix
 	 */
-	public static final void dprintln(char[] s){ if(debugPrinting) P.println(debugPrefix + s + debugPostfix); }
-	
-	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>println(debugPrefix + d + debugPostfix)</code>
-	 * @param d the double to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprintln(double d){ if(debugPrinting) P.println(debugPrefix + d + debugPostfix); }
-	
-	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>println(debugPrefix + f + debugPostfix)</code>
-	 * @param f the float to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprintln(float f){ if(debugPrinting) P.println(debugPrefix + f + debugPostfix); }
-	
-	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>println(debugPrefix + i + debugPostfix)</code>
-	 * @param i the integer to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprintln(int i){ if(debugPrinting) P.println(debugPrefix + i + debugPostfix); }
-	
-	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>println(debugPrefix + l + debugPostfix)</code>
-	 * @param l the long to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprintln(long l){ if(debugPrinting) P.println(debugPrefix + l + debugPostfix); }
-	
-	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>println(debugPrefix + o + debugPostfix)</code>
-	 * @param o the Object to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprintln(Object o){ if(debugPrinting) P.println(debugPrefix + o + debugPostfix); }
-	
-	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>println(debugPrefix + s + debugPostfix)</code>
-	 * @param s the String to be printed.
-	 * @see #debugPrinting
-	 * @see #debugPrefix
-	 * @see #debugPostfix
-	 */
-	public static final void dprintln(String s){ if(debugPrinting) P.println(debugPrefix + s + debugPostfix); }
+	public static final <T> void dprintln(boolean ignorePrefix, T p){
+		if(debugPrinting) 
+			P.println((ignorePrefix? "" : debugPrefix) + p + debugPostfix);
+	}
 
 	/**
-	 * If <code>debugPrinting</code> is true, it calls <code>printf(debugPrefix + s)</code>
-	 * <p><code>debugPrefix</code> IS NOT APPLIED TO THIS METHOD
+	 * If <code>debugPrinting</code> is true, it calls <code>print(debugPrefix + p + (ignorePostfix? "" : debugPostfix))</code>
+	 * @param p the value to be printed.
+	 * @param ignorePostfix if true, the postfix is not printed but the prefix always is.
+	 * @see #debugPrinting
+	 * @see #debugPrefix
+	 * @see #debugPostfix
+	 */
+	public static final <T> void dprint(T p, boolean ignorePostfix){
+		if(debugPrinting) 
+			P.print(debugPrefix + p + (ignorePostfix? "" : debugPostfix));
+	}
+
+	/**
+	 * If <code>debugPrinting</code> is true, it calls <code>println(debugPrefix + p + (ignorePostfix? "" : debugPostfix))</code>
+	 * @param p the value to be printed.
+	 * @param ignorePostfix if true, the postfix is not printed but the prefix always is.
+	 * @see #debugPrinting
+	 * @see #debugPrefix
+	 * @see #debugPostfix
+	 */
+	public static final <T> void dprintln(T p, boolean ignorePostfix){
+		if(debugPrinting) 
+			P.println(debugPrefix + p + (ignorePostfix? "" : debugPostfix));
+	}
+
+	/**
+	 * If <code>debugPrinting</code> is true, it calls <code>print((ignorePrefix? "" : debugPrefix) + p + (ignorePostfix? "" : debugPostfix))</code>
+	 * @param ignorePrefix if true, the prefix is not printed but the postfix always is.
+	 * @param p the value to be printed.
+	 * @param ignorePostfix if true, the postfix is not printed but the prefix always is.
+	 * @see #debugPrinting
+	 * @see #debugPrefix
+	 * @see #debugPostfix
+	 */
+	public static final <T> void dprint(boolean ignorePrefix, T p, boolean ignorePostfix){
+		if(debugPrinting) 
+			P.print((ignorePrefix? "" : debugPrefix) + p + (ignorePostfix? "" : debugPostfix));
+	}
+
+	/**
+	 * If <code>debugPrinting</code> is true, it calls <code>println((ignorePrefix? "" : debugPrefix) + p + (ignorePostfix? "" : debugPostfix))</code>
+	 * @param ignorePrefix if true, the prefix is not printed but the postfix always is.
+	 * @param p the value to be printed.
+	 * @param ignorePostfix if true, the postfix is not printed but the prefix always is.
+	 * @see #debugPrinting
+	 * @see #debugPrefix
+	 * @see #debugPostfix
+	 */
+	public static final <T> void dprintln(boolean ignorePrefix, T p, boolean ignorePostfix){
+		if(debugPrinting) 
+			P.println((ignorePrefix? "" : debugPrefix) + p + (ignorePostfix? "" : debugPostfix));
+	}
+
+	/**
+	 * If <code>debugPrinting</code> is true, it calls <code>printf(format, args)</code>
+	 * <p> The prefix and postfix are not printed.
 	 * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html#printf-java.lang.String-java.lang.Object...-">PrintStream.printf(String, Object)</a>
 	 * @param format the String to be printed.
 	 * @param args arguments referenced by the format specifiers in the format string; 
