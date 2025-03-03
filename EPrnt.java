@@ -32,7 +32,7 @@ public abstract class EPrnt {
 	 * Default constructor-
 	 * It's an abstract class; EPrnt is uninstantiable.
 	 */
-	private EPrnt(){}
+	public EPrnt(){}
 
 	/**
 	 * Toggles toggleable <code>dprint</code> and <code>dprintln</code> statements; 
